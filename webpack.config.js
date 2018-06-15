@@ -1,40 +1,34 @@
 'use strict';
 
-const path = require('path');
-
-const webpack = require('webpack');
-
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
-module.exports = {
-  devServer: {
-    // stats: 'normal',
+const parts = require('./webpack.parts');
 
-    watchOptions: {
-      // Delay the rebuild after the first change
-      aggregateTimeout: 300,
-      // Poll using interval (in ms, accepts boolen too)
-      poll: 1000,
-    },
+const commonConfig = merge([
+  {
+    plugins: [
+      new HtmlWebpackPlugin({
+        title: 'Webpack demo',
+      }),
+    ],
+  },
+]);
 
+const productionConfig = merge([]);
+
+const developmentConfig = merge([
+  parts.devServer({
+    // Customize host/port here if nedeed
     host: process.env.HOST,
     port: process.env.PORT,
-    
-    open: false,
-    
-    overlay: true,
-  },
+  }),
+]);
 
-  plugins: [
-    // Ignore node_modules so CPU usage with poll
-    // watching drops significantly.
-    new webpack.WatchIgnorePlugin([
-      path.join(__dirname, 'node_modules')
-    ]),
-    new HtmlWebpackPlugin({
-      title: 'Webpack demo',
-    }),
-    new ErrorOverlayPlugin(),
-  ],
+module.exports = mode => {
+  if (mode === 'production') {
+    return merge(commonConfig, productionConfig, { mode });
+  }
+
+  return merge(commonConfig, developmentConfig, { mode });
 };
