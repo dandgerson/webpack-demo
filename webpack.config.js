@@ -6,6 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const parts = require('./webpack.parts');
 
 const commonConfig = merge([
+  
+  parts.loadCSS(),
+
   {
     plugins: [
       new HtmlWebpackPlugin({
