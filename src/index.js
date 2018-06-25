@@ -1,6 +1,6 @@
 'use strict';
 
-import './main.css';
+import './main.scss';
 
 import component from './component';
 
