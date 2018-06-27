@@ -1,5 +1,7 @@
 'use strict';
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
     // stats: 'errors-only',
@@ -11,7 +13,7 @@ exports.devServer = ({ host, port } = {}) => ({
     overlay: true,
     
     // Hot Module Replacement
-    hotOnly: true,
+    hot: true,
   },
 });
 
@@ -28,3 +30,26 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
     ],
   },
 });
+
+exports.extractCSS = ({ include, exclude, use = [] }) => {
+  const plugin = new MiniCssExtractPlugin({
+    filename: '[name].css',
+  });
+
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.(sc|sa|c)ss$/,
+          include,
+          exclude,
+
+          use: [
+            MiniCssExtractPlugin.loader,
+          ].concat(use),
+        },
+      ],
+    },
+    plugins: [plugin],
+  };
+};

@@ -2,17 +2,17 @@
 
 const path = require('path');
 
-const webpack = require('webpack');
+// Tools
 const merge = require('webpack-merge');
 
+// Plugins
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Configuration parts
 const parts = require('./webpack.parts');
 
 const commonConfig = merge([
-  
-  parts.loadCSS(),
-
   {
     plugins: [
       new HtmlWebpackPlugin({
@@ -22,9 +22,16 @@ const commonConfig = merge([
   },
 ]);
 
-const productionConfig = merge([]);
+const productionConfig = merge([
+  parts.extractCSS({
+    use: ['css-loader', 'sass-loader'],
+  })
+]);
 
 const developmentConfig = merge([
+
+  parts.loadCSS(),
+
   {
     devtool: 'source-map',
   },
