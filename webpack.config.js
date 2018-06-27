@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const glob = require('glob');
 
 // Tools
 const merge = require('webpack-merge');
@@ -11,6 +12,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // Configuration parts
 const parts = require('./webpack.parts');
+
+// for purifyCSS
+const PATHS = {
+  app: path.join(__dirname, 'src'),
+};
 
 const commonConfig = merge([
   {
@@ -25,7 +31,12 @@ const commonConfig = merge([
 const productionConfig = merge([
   parts.extractCSS({
     use: ['css-loader', 'sass-loader'],
-  })
+  }),
+  // plugin should be applied after MiniCssExtractPlugin
+  parts.purifyCSS({
+    paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
+  }),
+
 ]);
 
 const developmentConfig = merge([
