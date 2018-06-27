@@ -1,5 +1,10 @@
 /* main.scss */
 
 body {
-  background-color: rgb(50, 200, 205);
+  background-color: aqua;
+}
+
+.pure-button {
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
 }
