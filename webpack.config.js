@@ -13,12 +13,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // Configuration parts
 const parts = require('./webpack.parts');
 
-// for purifyCSS
+// for purifyCSS, loadJavaScript
 const PATHS = {
   app: path.join(__dirname, 'src'),
 };
 
 const commonConfig = merge([
+  parts.loadJavaScript({ include: PATHS.app }),
+
   {
     plugins: [
       new HtmlWebpackPlugin({
@@ -55,6 +57,7 @@ const developmentConfig = merge([
 
   {
     devtool: 'source-map',
+    // devtool: false,
   },
 
   parts.devServer({
