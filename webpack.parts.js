@@ -66,3 +66,19 @@ exports.autoprefix = () => ({
     plugins: () => [require('autoprefixer')()],
   },
 });
+
+exports.loadImages = ({ include, exclude, options } = {}) => ({
+  module: {
+    rules: [
+      {
+        test: /\.(pn|jp|sv)g$/,
+        include,
+        exclude,
+        use: {
+          loader: 'url-loader',
+          options,
+        },
+      },
+    ],
+  },
+});

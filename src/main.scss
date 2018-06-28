@@ -1,7 +1,11 @@
 /* main.scss */
 
 body {
-  background-color: aqua;
+  background-color: rgb(140, 213, 255);
+
+  background-image: url('./400.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
 .pure-button {

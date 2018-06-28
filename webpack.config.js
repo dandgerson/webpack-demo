@@ -32,9 +32,17 @@ const productionConfig = merge([
   parts.extractCSS({
     use: ['css-loader', parts.autoprefix(), 'sass-loader'],
   }),
+
   // plugin should be applied after MiniCssExtractPlugin
   parts.purifyCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
+  }),
+
+  parts.loadImages({
+    options: {
+      limit: 15000,
+      name: '[name].[ext]',
+    },
   }),
 
 ]);
@@ -42,6 +50,8 @@ const productionConfig = merge([
 const developmentConfig = merge([
 
   parts.loadCSS(),
+
+  parts.loadImages(),
 
   {
     devtool: 'source-map',
