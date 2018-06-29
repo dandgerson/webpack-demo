@@ -20,7 +20,7 @@ const PATHS = {
 
 const commonConfig = merge([
   parts.loadJavaScript({ include: PATHS.app }),
-  
+
   parts.generateSourceMaps({ type: 'source-map' }),
 
   {
@@ -48,6 +48,14 @@ const productionConfig = merge([
       name: '[name].[ext]',
     },
   }),
+
+  {
+    optimization: {
+      splitChunks: {
+        chunks: 'initial',
+      }
+    },
+  },
 
 ]);
 

@@ -1,5 +1,8 @@
 'use strict';
 
+import 'react';
+import 'react-dom';
+
 import 'purecss';
 
 import './main.scss';
