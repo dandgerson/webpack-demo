@@ -20,6 +20,8 @@ const PATHS = {
 
 const commonConfig = merge([
   parts.loadJavaScript({ include: PATHS.app }),
+  
+  parts.generateSourceMaps({ type: 'source-map' }),
 
   {
     plugins: [
@@ -54,11 +56,6 @@ const developmentConfig = merge([
   parts.loadCSS(),
 
   parts.loadImages(),
-
-  {
-    devtool: 'source-map',
-    // devtool: false,
-  },
 
   parts.devServer({
     // Customize host/port here if nedeed
