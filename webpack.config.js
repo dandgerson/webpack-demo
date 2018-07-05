@@ -16,6 +16,7 @@ const parts = require('./webpack.parts');
 // for purifyCSS, loadJavaScript
 const PATHS = {
   app: path.join(__dirname, 'src'),
+  build: path.join(__dirname, 'dist'),
 };
 
 const commonConfig = merge([
@@ -57,6 +58,9 @@ const productionConfig = merge([
     },
   },
 
+  parts.clean(PATHS.build),
+
+  parts.attachRevision(),
 ]);
 
 const developmentConfig = merge([
