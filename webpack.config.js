@@ -53,7 +53,7 @@ const productionConfig = merge([
     optimization: {
       splitChunks: {
         chunks: 'initial',
-      }
+      },
     },
   },
 
