@@ -5,6 +5,8 @@ const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 const GitRevisionPlugin = require('git-revision-webpack-plugin');
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+
 
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
@@ -112,4 +114,12 @@ exports.attachRevision = () => ({
       banner: new GitRevisionPlugin().version(),
     }),
   ],
+});
+
+exports.minifyJavaScript = () => ({
+  optimization: {
+    minimizer: [new UglifyWebpackPlugin({
+      sourceMap: true,
+    })],
+  },
 });

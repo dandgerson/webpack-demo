@@ -60,6 +60,8 @@ const productionConfig = merge([
 
   parts.clean(PATHS.build),
 
+  parts.minifyJavaScript(),
+
   parts.attachRevision(),
 ]);
 
