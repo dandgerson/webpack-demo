@@ -62,6 +62,16 @@ const productionConfig = merge([
 
   parts.minifyJavaScript(),
 
+  parts.minifyCSS({
+    options: {
+      discardComments: {
+        removeAll: true,
+      },
+      // safe: true,
+      parser: require('postcss-safe-parser'),
+    },
+  }),
+
   parts.attachRevision(),
 ]);
 
