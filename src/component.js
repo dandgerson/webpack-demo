@@ -2,7 +2,7 @@
 
 import lazy from './lazy';
 
-export default (text = 'Hell of Aqua Lord!') => {
+export default (text = HELLO) => {
   const element = document.createElement('div');
 
   element.classList.add('pure-button');

@@ -31,6 +31,8 @@ const commonConfig = merge([
       }),
     ],
   },
+
+  parts.setFreeVariable('HELLO', 'Hell of the Aqua Lord!'),
 ]);
 
 const productionConfig = merge([
